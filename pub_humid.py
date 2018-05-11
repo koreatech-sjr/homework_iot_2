@@ -38,7 +38,7 @@ mqttc.loop_start()
 try:
     while True:
         t = getMsg()
-        (result, m_id) = mqttc.publish("home/humidity", t)
+        (result, m_id) = mqttc.publish("environment/humidity", t)
         time.sleep(2)
 
 except KeyboardInterrupt:

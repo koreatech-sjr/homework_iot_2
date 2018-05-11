@@ -41,8 +41,8 @@ def convert2volts(data, places):
 ### subscribe
 def on_connect_subscribe(client, userdata, flags, rc):
     print("connected with result code " + str(rc))
-    client.subscribe("home/temperature")
-    client.subscribe("home/humidity")
+    client.subscribe("environment/temperature")
+    client.subscribe("environment/humidity")
 
 def on_message(client, userdata, msg):
 
@@ -51,9 +51,9 @@ def on_message(client, userdata, msg):
 
     print("Topic: " + msg.topic + " Message: " + str(msg.payload))
 
-    if msg.topic == "home/temperature":
+    if msg.topic == "environment/temperature":
         temp = float(msg.payload)
-    elif msg.topic == "home/humidity":
+    elif msg.topic == "environment/humidity":
         humidity = float(msg.payload)
 
     print("temp :", temp)
@@ -118,5 +118,5 @@ except KeyboardInterrupt:
         print("Finished")
         spi.close()
         gpio.cleanup()
-        client.unsubscribe(["home/temperature", "home/humidity"])
+        client.unsubscribe(["environment/temperature", "environment/humidity"])
         client.disconnect()
