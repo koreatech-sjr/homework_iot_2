@@ -2,6 +2,7 @@ import spidev
 import time
 import RPi.GPIO as gpio
 import time
+import paho.mqtt.client as mqtt
 
 trig_pin = 13
 echo_pin = 19
