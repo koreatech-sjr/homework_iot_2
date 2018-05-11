@@ -51,7 +51,7 @@ try:
         if result.is_valid():
             result = instance.read()
             t = getMsg(result.humidity)
-        else
+        else:
             t = "humid sensor error"
 
         (result, m_id) = mqttc.publish("environment/humidity", t)
