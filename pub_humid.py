@@ -48,6 +48,7 @@ mqttc.loop_start()
 
 try:
     while True:
+        result = instance.read()
         if result.is_valid():
             result = instance.read()
             t = getMsg(result.humidity)
