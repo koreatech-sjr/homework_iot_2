@@ -70,8 +70,8 @@ try:
                 light_level = readChannel(light_channel)
                 light_volts = convert2volts(light_level, 2)
 
-                print("-------------------------------------")
-                print("Light: %d (%f V)" %(light_level, light_volts))
+                # print("-------------------------------------")
+                # print("Light: %d (%f V)" %(light_level, light_volts))
                 #ultrasonic
                 gpio.output(trig_pin, False)
                 time.sleep(0.5)
@@ -90,7 +90,7 @@ try:
                 distance = pulse_duration * 34000 / 2
                 distance = round(distance, 2)
 
-                print("Distance : ", distance, "cm")
+                # print("Distance : ", distance, "cm")
                 # homework
                 if light_level <= 150:
                     gpio.output(led_green_pin, True)
