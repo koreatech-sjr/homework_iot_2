@@ -22,7 +22,6 @@ spi = spidev.SpiDev()
 spi.open(0,0)
 spi.max_speed_hz = 61000
 
-light_channel = 0
 temp_channel = 1
 
 temp = 0.0
@@ -67,11 +66,6 @@ client.connect("192.168.0.24", 1883, 60)
 client.loop_start()
 try:
         while True:
-                light_level = readChannel(light_channel)
-                light_volts = convert2volts(light_level, 2)
-
-                # print("-------------------------------------")
-                # print("Light: %d (%f V)" %(light_level, light_volts))
                 #ultrasonic
                 gpio.output(trig_pin, False)
                 time.sleep(0.5)
@@ -92,24 +86,20 @@ try:
 
                 # print("Distance : ", distance, "cm")
                 # homework
-                if light_level <= 150:
-                    gpio.output(led_green_pin, True)
-                    gpio.output(led_yellow_pin, True)
-                    gpio.output(led_red_pin, True)
 
-                if distance >= 30 and light_level>151:
+                if distance >= 30:
                     print('green')
                     gpio.output(led_green_pin,True)
                     gpio.output(led_yellow_pin, False)
                     gpio.output(led_red_pin, False)
 
-                elif distance >= 10 and light_level>151:
+                elif distance >= 10:
                     print('yellow')
                     gpio.output(led_green_pin, False)
                     gpio.output(led_yellow_pin, True)
                     gpio.output(led_red_pin, False)
 
-                elif distance <10 and light_level>151:
+                elif distance <10:
                     print('Red')
                     gpio.output(led_green_pin, False)
                     gpio.output(led_yellow_pin, False)
