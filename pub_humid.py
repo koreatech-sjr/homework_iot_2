@@ -59,7 +59,7 @@ try:
 
 
 		# print("Temperature: %d C" % result.temperature)
-		print("Humidity: %d %%" % result.humidity)
+        # print("Humidity: %d %%" % result.humidity)
         print("test")
         time.sleep(2)
 
