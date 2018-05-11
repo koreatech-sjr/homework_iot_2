@@ -57,7 +57,7 @@ try:
         (result, m_id) = mqttc.publish("environment/humidity", t)
 
 
-		#print("Temperature: %d C" % result.temperature)
+		# print("Temperature: %d C" % result.temperature)
 		print("Humidity: %d %%" % result.humidity)
 
         time.sleep(2)
