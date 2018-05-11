@@ -1,13 +1,24 @@
 import paho.mqtt.client as mqtt
 import random
 import time
+import RPi.GPIO as GPIO
+import dht11
+import time
+import datetime
 
+# initialize GPIO
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.cleanup()
+
+# read data using pin 5
+instance = dht11.DHT11(pin = 26)
 ### humid sensor
 
 idx = 0
 
-def getMsg():
-    msg = str(random.randrange(30, 96))
+def getHumid(humid):
+    msg = humid
     return msg
 
 def on_connect(client, userdata, flags, rc):
@@ -37,8 +48,18 @@ mqttc.loop_start()
 
 try:
     while True:
-        t = getMsg()
+        if result.is_valid():
+            result = instance.read()
+            t = getMsg(result.humidity)
+        else
+            t = "humid sensor error"
+
         (result, m_id) = mqttc.publish("environment/humidity", t)
+
+
+		#print("Temperature: %d C" % result.temperature)
+		print("Humidity: %d %%" % result.humidity)
+
         time.sleep(2)
 
 except KeyboardInterrupt:
