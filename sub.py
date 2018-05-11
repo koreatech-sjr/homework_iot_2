@@ -10,7 +10,7 @@ echo_pin = 19
 led_red_pin = 20
 led_yellow_pin = 6
 led_green_pin = 5
-gpio.cleanup()
+
 gpio.setmode(gpio.BCM)
 gpio.setup(trig_pin, gpio.OUT)
 gpio.setup(echo_pin, gpio.IN)
