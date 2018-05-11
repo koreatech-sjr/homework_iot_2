@@ -52,9 +52,9 @@ def on_message(client, userdata, msg):
     print("Topic: " + msg.topic + " Message: " + str(msg.payload))
 
     if msg.topic == "environment/temperature":
-        temp = float(msg.payload)
+        temp = msg.payload
     elif msg.topic == "environment/humidity":
-        humidity = float(msg.payload)
+        humidity = msg.payload
 
     print("temp :", temp)
     print("humidity :", humidity)

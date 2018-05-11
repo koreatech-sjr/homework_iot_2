@@ -18,7 +18,7 @@ instance = dht11.DHT11(pin = 26)
 idx = 0
 
 def getHumid(humid):
-    msg = string(humid)
+    msg = humid
     return msg
 
 def on_connect(client, userdata, flags, rc):
