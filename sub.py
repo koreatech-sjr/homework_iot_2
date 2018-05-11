@@ -101,6 +101,7 @@ try:
                     print('green')
                     gpio.output(led_green_pin,True)
                     gpio.output(led_yellow_pin, False)
+                    gpio.output(led_red_pin, False)
 
                 elif distance >= 10 and light_level>151:
                     print('yellow')
