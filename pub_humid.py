@@ -12,17 +12,20 @@ GPIO.setmode(GPIO.BCM)
 GPIO.cleanup()
 
 # read data using pin 5
-instance = dht11.DHT11(pin = 26)
-### humid sensor
+instance = dht11.DHT11(pin=26)
+# humid sensor
 
 idx = 0
+
 
 def getHumid(humid):
     msg = humid
     return msg
 
+
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code " + str(rc))
+
 
 def on_publish(client, userdata, mid):
     global idx
@@ -30,9 +33,10 @@ def on_publish(client, userdata, mid):
     for i in range(idx):
         print "-",
     msg_id = mid
-    if idx == 10 :
+    if idx == 10:
         idx = 0
     print("\n message published")
+
 
 mqttc = mqtt.Client()
 mqttc.on_connect = on_connect
@@ -43,7 +47,7 @@ mqttc.on_publish = on_publish
 mqttc.connect("192.168.0.24")
 # mac
 # mqttc.connect("172.19.89.83")
-#mqttc.connect("localhost")
+# mqttc.connect("localhost")
 mqttc.loop_start()
 
 try:
@@ -57,8 +61,7 @@ try:
 
         (result, m_id) = mqttc.publish("environment/humidity", t)
 
-
-		# print("Temperature: %d C" % result.temperature)
+        # print("Temperature: %d C" % result.temperature)
         # print("Humidity: %d %%" % result.humidity)
         print("test")
         time.sleep(2)
