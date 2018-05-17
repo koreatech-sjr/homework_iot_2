@@ -12,13 +12,13 @@ GPIO.setmode(GPIO.BCM)
 GPIO.cleanup()
 
 # read data using pin 5
-instance = dht11.DHT11(pin=26)
+instance = dht11.DHT11(pin=27)
 # temp sensor
 
 idx = 0
 
 
-def getTemperature(temperature):
+def getMsg(temperature):
     msg = temperature
     return msg
 
@@ -44,7 +44,7 @@ mqttc.on_publish = on_publish
 
 # YOU NEED TO CHANGE THE IP ADDRESS OR HOST NAME
 # pi
-mqttc.connect("192.168.0.24")
+mqttc.connect("192.168.0.6")
 # mac
 # mqttc.connect("172.19.89.83")
 # mqttc.connect("localhost")
@@ -58,7 +58,7 @@ try:
             t = getMsg(result.temperature)
         else:
             t = "temperature sensor error"
-
+        print(result.temperature)
         (result, m_id) = mqttc.publish("environment/temperature", t)
 
         # print("Temperature: %d C" % result.temperature)
