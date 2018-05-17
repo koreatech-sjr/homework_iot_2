@@ -1,13 +1,25 @@
 import paho.mqtt.client as mqtt
 import random
 import time
+import RPi.GPIO as GPIO
+import dht11
+import time
+import datetime
 
+# initialize GPIO
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.cleanup()
+
+# read data using pin 5
+instance = dht11.DHT11(pin=26)
 # temp sensor
+
 idx = 0
 
 
-def getMsg():
-    msg = str(random.randrange(15, 36))
+def getTemperature(temperature):
+    msg = temperature
     return msg
 
 
@@ -19,7 +31,7 @@ def on_publish(client, userdata, mid):
     global idx
     idx = idx+1
     for i in range(idx):
-        print "-", end = ''
+        print "-",
     msg_id = mid
     if idx == 10:
         idx = 0
@@ -40,8 +52,18 @@ mqttc.loop_start()
 
 try:
     while True:
-        t = getMsg()
+        result = instance.read()
+        print(result)
+        if result.is_valid():
+            t = getMsg(result.temperature)
+        else:
+            t = "temperature sensor error"
+
         (result, m_id) = mqttc.publish("environment/temperature", t)
+
+        # print("Temperature: %d C" % result.temperature)
+        # print("Humidity: %d %%" % result.humidity)
+        print("test")
         time.sleep(2)
 
 except KeyboardInterrupt:
