@@ -17,6 +17,7 @@ spi.open(0, 0)
 spi.max_speed_hz = 61000
 idx = 0
 
+
 def readChannel(channel):
     adc = spi.xfer2([1, (8 + channel) << 4, 0])
     adc_out = ((adc[1] & 3) << 8) + adc[2]
@@ -40,7 +41,7 @@ def on_connect(client, userdata, flags, rc):
 
 def on_publish(client, userdata, mid):
     global idx
-    idx = idx+1
+    idx = idx + 1
     for i in range(idx):
         print "-",
     msg_id = mid
@@ -91,6 +92,3 @@ except KeyboardInterrupt:
     gpio.cleanup()
     mqttc.loop_stop()
     mqttc.disconnect()
-
-
-

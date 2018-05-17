@@ -40,7 +40,7 @@ def on_message(client, userdata, msg):
     global humidity
     global distance
     global flag
-    
+
     print("Topic: " + msg.topic + " Message: " + str(msg.payload))
 
     if msg.topic == "environment/temperature":
@@ -55,7 +55,7 @@ def on_message(client, userdata, msg):
                 gpio.output(led_red_pin, True)
             else :
                 flag = False
-    
+
     elif msg.topic == "environment/humidity":
         if msg.payload==("humid sensor error"):
             print("msg.payload")
@@ -68,7 +68,7 @@ def on_message(client, userdata, msg):
                 gpio.output(led_red_pin, True)
             else :
                 flag = False
-    
+
     elif msg.topic == "environment/distance":
         distance = msg.payload
         distance = float(distance)

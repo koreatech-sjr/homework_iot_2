@@ -29,7 +29,7 @@ def on_connect(client, userdata, flags, rc):
 
 def on_publish(client, userdata, mid):
     global idx
-    idx = idx+1
+    idx = idx + 1
     for i in range(idx):
         print "-",
     msg_id = mid
